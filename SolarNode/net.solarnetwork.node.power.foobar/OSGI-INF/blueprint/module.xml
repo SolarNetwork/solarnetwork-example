@@ -14,10 +14,15 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames" value="net.solarnetwork.node.power.foobar.FoobarDatumDataSource"/>
+	</bean>
+	
 	<bean id="settingsFactory" 
 		class="net.solarnetwork.node.settings.support.BasicSettingSpecifierProviderFactory">
 		<property name="displayName" value="Foobar Power"/>
 		<property name="factoryUID" value="net.solarnetwork.node.power.foobar"/>
+		<property name="messageSource" ref="messageSource"/>
 	</bean>
 
 	<service ref="settingsFactory" interface="net.solarnetwork.node.settings.SettingSpecifierProviderFactory"/>
@@ -31,7 +36,9 @@
 			<beans:entry key="datumClassName" value="net.solarnetwork.node.power.PowerDatum"/>
 			<beans:entry key="settingPid" value="net.solarnetwork.node.power.foobar"/>
 		</osgix:service-properties>
-			<bean class="net.solarnetwork.node.power.foobar.FoobarDatumDataSource"/>
+		<bean class="net.solarnetwork.node.power.foobar.FoobarDatumDataSource">
+			<property name="messageSource" ref="messageSource"/>
+		</bean>
 	</osgix:managed-service-factory>
 	
 </blueprint>

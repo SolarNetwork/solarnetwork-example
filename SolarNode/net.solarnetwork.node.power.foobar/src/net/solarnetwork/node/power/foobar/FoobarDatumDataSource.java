@@ -44,6 +44,7 @@ public class FoobarDatumDataSource implements DatumDataSource<PowerDatum>, Setti
 	private final AtomicLong wattHourReading = new AtomicLong(0);
 
 	private String sourceId = "Main";
+	private MessageSource messageSource;
 
 	@Override
 	public Class<? extends PowerDatum> getDatumType() {
@@ -85,7 +86,7 @@ public class FoobarDatumDataSource implements DatumDataSource<PowerDatum>, Setti
 
 	@Override
 	public MessageSource getMessageSource() {
-		return null;
+		return messageSource;
 	}
 
 	@Override
@@ -94,6 +95,10 @@ public class FoobarDatumDataSource implements DatumDataSource<PowerDatum>, Setti
 		List<SettingSpecifier> results = new ArrayList<SettingSpecifier>(1);
 		results.add(new BasicTextFieldSettingSpecifier("sourceId", defaults.sourceId));
 		return results;
+	}
+
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
 	}
 
 }
