@@ -1,4 +1,3 @@
-solarnetwork-example
-====================
+# SolarNetwork Code Examples
 
-Example code for SolarNetwork developers
+This repository contains example code for SolarNetwork developers.
