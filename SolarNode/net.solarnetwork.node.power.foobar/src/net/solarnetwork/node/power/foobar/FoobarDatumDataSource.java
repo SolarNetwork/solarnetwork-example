@@ -37,13 +37,14 @@ import org.springframework.context.MessageSource;
  * Implementation of {@link DatumDataSource} for Foobar inverter power.
  * 
  * @author matt
- * @version 1.0
+ * @version 1.1
  */
 public class FoobarDatumDataSource implements DatumDataSource<PowerDatum>, SettingSpecifierProvider {
 
 	private final AtomicLong wattHourReading = new AtomicLong(0);
 
 	private String sourceId = "Main";
+	private String groupUID;
 	private MessageSource messageSource;
 
 	@Override
@@ -75,6 +76,20 @@ public class FoobarDatumDataSource implements DatumDataSource<PowerDatum>, Setti
 	// SettingSpecifierProvider
 
 	@Override
+	public String getUID() {
+		return sourceId;
+	}
+
+	@Override
+	public String getGroupUID() {
+		return groupUID;
+	}
+
+	public void setGroupUID(String groupUID) {
+		this.groupUID = groupUID;
+	}
+
+	@Override
 	public String getSettingUID() {
 		return "net.solarnetwork.node.power.foobar";
 	}
@@ -94,6 +109,7 @@ public class FoobarDatumDataSource implements DatumDataSource<PowerDatum>, Setti
 		FoobarDatumDataSource defaults = new FoobarDatumDataSource();
 		List<SettingSpecifier> results = new ArrayList<SettingSpecifier>(1);
 		results.add(new BasicTextFieldSettingSpecifier("sourceId", defaults.sourceId));
+		results.add(new BasicTextFieldSettingSpecifier("groupUID", defaults.groupUID));
 		return results;
 	}
 
