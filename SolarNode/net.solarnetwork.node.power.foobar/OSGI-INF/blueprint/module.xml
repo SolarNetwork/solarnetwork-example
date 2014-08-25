@@ -25,6 +25,11 @@
 		<property name="messageSource" ref="messageSource"/>
 	</bean>
 
+	<bean id="eventAdmin" class="net.solarnetwork.util.DynamicServiceTracker">
+		<property name="bundleContext" ref="bundleContext"/>
+		<property name="serviceClassName" value="org.osgi.service.event.EventAdmin"/>
+	</bean>
+	
 	<service ref="settingsFactory" interface="net.solarnetwork.node.settings.SettingSpecifierProviderFactory"/>
 	
 	<osgix:managed-service-factory factory-pid="net.solarnetwork.node.power.foobar" autowire-on-update="true">
@@ -37,6 +42,7 @@
 			<beans:entry key="settingPid" value="net.solarnetwork.node.power.foobar"/>
 		</osgix:service-properties>
 		<bean class="net.solarnetwork.node.power.foobar.FoobarDatumDataSource">
+			<property name="eventAdmin" ref="eventAdmin"/>
 			<property name="messageSource" ref="messageSource"/>
 		</bean>
 	</osgix:managed-service-factory>
