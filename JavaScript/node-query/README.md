@@ -44,7 +44,7 @@ node sn-agg-query.js -n 199 -s Solar -s DB -p wattHours -p wattHoursReverse -b 2
 
 This will print out all the returned data grouped by source, followed by the raw property values, if `-p` was used:
 
-```json
+```js
 { DB:
    [ { nodeId: 199,
        sourceId: 'DB',
