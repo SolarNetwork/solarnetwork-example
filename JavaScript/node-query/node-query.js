@@ -49,7 +49,9 @@ function query(options) {
 
 	sn.api.datum.loader(sourceIds, urlHelper, startDate, endDate, agg).load(function(error, data) {
 		// group the results by source, e.g. { Source1 : [...], Source2 : [...], ... }
-		var groupedBySource = groupResultsBySource(data, options.property);
+		var groupedBySource = groupResultsBySource(data, options.property),
+			sourceId;
+
 		console.info(groupedBySource);
 
 		if ( !options.property ) {
@@ -58,8 +60,7 @@ function query(options) {
 
 		// can extract just a simple array of the first property, for example let's print out
 		// the raw property data as an array for each source
-
-		sourceIds.forEach(function(sourceId) {
+		for ( sourceId in groupedBySource ) {
 			var resultsForSource = groupedBySource[sourceId];
 
 			// check in case no results for source ID
@@ -78,15 +79,15 @@ function query(options) {
 				});
 				console.info('\n%s: %s', propName, propDataForSource);
 			});
-		});
+		}
 	});
 }
 
 var getopt = new Getopt([
 		['n', 'node=ARG', 'node ID'],
 		['s', 'source=ARG+', 'source ID'],
-		['b', 'begin-date=ARG', 'begin date'],
-		['e', 'end-date=ARG', 'end date'],
+		['b', 'begin-date=ARG', 'begin date, in YYYY-MM-DD HH:mm or YYYY-MM-DD format'],
+		['e', 'end-date=ARG', 'end date, exclusive if --aggregate used'],
 		['a', 'aggregate=ARG', 'aggregate, e.g. FiveMinute, Hour, Day, Month'],
 		['p', 'property=ARG+', 'output property, e.g. wattHours'],
 		['h', 'help', 'show this help']
