@@ -22,10 +22,16 @@
 
 package net.solarnetwork.node.example.datum_capture;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.context.MessageSource;
 import net.solarnetwork.node.DatumDataSource;
 import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
+import net.solarnetwork.node.settings.SettingSpecifier;
+import net.solarnetwork.node.settings.SettingSpecifierProvider;
+import net.solarnetwork.node.settings.support.BasicTextFieldSettingSpecifier;
 
 /**
  * Implementation of {@link DatumDataSource} for Foobar inverter power.
@@ -33,11 +39,13 @@ import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
  * @author matt
  * @version 1.0
  */
-public class FoobarDatumDataSource implements DatumDataSource<GeneralNodePVEnergyDatum> {
+public class FoobarDatumDataSource
+		implements DatumDataSource<GeneralNodePVEnergyDatum>, SettingSpecifierProvider {
 
 	private final AtomicLong wattHourReading = new AtomicLong(0);
 
 	private String sourceId = "Inverter1";
+	private MessageSource messageSource;
 
 	@Override
 	public String getUID() {
@@ -73,8 +81,35 @@ public class FoobarDatumDataSource implements DatumDataSource<GeneralNodePVEnerg
 		return datum;
 	}
 
+	@Override
+	public String getSettingUID() {
+		return "net.solarnetwork.node.example.datum_capture.foobar";
+	}
+
+	@Override
+	public String getDisplayName() {
+		return "Foobar Power";
+	}
+
+	@Override
+	public MessageSource getMessageSource() {
+		return messageSource;
+	}
+
+	@Override
+	public List<SettingSpecifier> getSettingSpecifiers() {
+		FoobarDatumDataSource defaults = new FoobarDatumDataSource();
+		List<SettingSpecifier> results = new ArrayList<SettingSpecifier>(1);
+		results.add(new BasicTextFieldSettingSpecifier("sourceId", defaults.sourceId));
+		return results;
+	}
+
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
+	}
+
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
 	}
 
 }
