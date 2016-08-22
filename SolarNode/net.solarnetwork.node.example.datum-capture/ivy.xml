@@ -11,7 +11,7 @@
 		<artifact type="sources" ext="jar" conf="sources" m:classifier="sources"/>
 	</publications>
 	<dependencies defaultconfmapping="runtime->default(runtime);compile->default(compile)">
-    	<dependency org="net.solarnetwork.node" name="net.solarnetwork.node" rev="[1.39,2.0)"/>
+    	<dependency org="net.solarnetwork.node" name="net.solarnetwork.node" rev="[1.40,2.0)"/>
     	<dependency org="com.opensymphony.quartz" name="com.springsource.org.quartz" rev="1.6.2" conf="runtime"/>
     	<dependency org="org.slf4j" name="slf4j-api" rev="1.7.0"/>
 		<dependency org="org.springframework" name="spring-context-support" rev="3.2.0.RELEASE"/>

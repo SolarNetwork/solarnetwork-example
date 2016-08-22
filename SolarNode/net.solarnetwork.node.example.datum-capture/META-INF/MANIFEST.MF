@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Example Datum Capture
 Bundle-SymbolicName: net.solarnetwork.node.example.datum-capture
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-Vendor: SolarNetwork
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: 
@@ -10,8 +10,8 @@ Import-Package:
  net.solarnetwork.node.dao;version="1.7.0",
  net.solarnetwork.node.domain;version="1.7.0",
  net.solarnetwork.node.job;version="1.13.1",
- net.solarnetwork.node.settings;version="1.7.0",
- net.solarnetwork.node.settings.support;version="1.5.0",
+ net.solarnetwork.node.settings;version="1.8.0",
+ net.solarnetwork.node.settings.support;version="1.6.0",
  net.solarnetwork.node.support;version="1.13.1",
  net.solarnetwork.node.util;version="1.6.0",
  net.solarnetwork.util;version="1.21.0",
