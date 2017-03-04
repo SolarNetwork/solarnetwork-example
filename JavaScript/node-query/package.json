@@ -1,6 +1,6 @@
 {
   "name": "node-query",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Example of using the solarnetwork-d3 package to query data.",
   "private": true,
   "main": "node-query.js",
@@ -13,6 +13,6 @@
   "dependencies": {
     "node-getopt": "^0.2.x",
 	"xmlhttprequest": "^1.x",
-    "solarnetwork-d3": "^0.12.0"
+    "solarnetwork-d3": "^0.13.0"
   }
 }

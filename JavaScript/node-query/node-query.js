@@ -45,9 +45,22 @@ function query(options) {
 		startDate = parseDate(options['begin-date']),
 		endDate = parseDate(options['end-date']),
 		agg = (options['aggregate'] || 'Day'),
-		urlHelper = sn.api.node.nodeUrlHelper(nodeId);
+		urlHelper = sn.api.node.nodeUrlHelper(nodeId, {secureQuery:(options.token ? true : false)});
 
-	sn.api.datum.loader(sourceIds, urlHelper, startDate, endDate, agg).load(function(error, data) {
+	var loader = sn.api.datum.loader(sourceIds, urlHelper, startDate, endDate, agg);
+	if ( options.token && options.secret ) {
+		loader.jsonClient(sn.net.securityHelper(options.token, options.secret));
+	}
+	loader.load(function(error, data) {
+		if ( error ) {
+			if ( error.status >= 400 && error.status < 500 ) {
+				console.error('Access denied.');
+			} else {
+				console.error('Error requesting data: ' +error.responseText);
+			}
+			return;
+		}
+
 		// group the results by source, e.g. { Source1 : [...], Source2 : [...], ... }
 		var groupedBySource = groupResultsBySource(data, options.property),
 			sourceId;
@@ -89,10 +102,12 @@ var getopt = new Getopt([
 		['b', 'begin-date=ARG', 'begin date, in YYYY-MM-DD HH:mm or YYYY-MM-DD format'],
 		['e', 'end-date=ARG', 'end date, exclusive if --aggregate used'],
 		['a', 'aggregate=ARG', 'aggregate, e.g. FiveMinute, Hour, Day, Month'],
+		['t', 'token=ARG', 'a SolarNet token to use'],
+		['s', 'secret=ARG', 'the SolarNet token secret to use'],
 		['p', 'property=ARG+', 'output property, e.g. wattHours'],
 		['h', 'help', 'show this help']
 	]).bindHelp(
-	  "Usage: node sn-agg-query.js [OPTIONS]\n" +
+	  "Usage: node node-query.js [OPTIONS]\n" +
 	  "\n" +
 	  "Execute a SolarQuery datum query and show the results.\n" +
 	  "\n" +
