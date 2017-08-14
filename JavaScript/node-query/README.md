@@ -21,7 +21,7 @@ node node-query.js
 to print out the available options:
 
 ```
-Usage: node sn-agg-query.js [OPTIONS]
+Usage: node node-query.js [OPTIONS]
 
 Execute a SolarQuery datum query and show the results.
 
