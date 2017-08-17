@@ -1,0 +1,241 @@
+html {
+	background-color: rgba(34,175,176,1.0);
+	background: -webkit-linear-gradient(top, rgba(104,144,173,1) 0%,rgba(102,126,153,1) 100%) no-repeat center center fixed;
+	background: -moz-linear-gradient(top, rgba(104,144,173,1) 0%,rgba(102,126,153,1) 100%) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+body {
+	font-family:  "DejaVu Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: 10px;
+	background: none;
+}
+
+header {
+	margin: 10px 0 !important;
+}
+
+footer {
+	clear: both;
+	font-size: 10px;
+	text-align: right;
+	margin: 10px 20px;
+}
+
+header,
+section,
+footer {
+	color: white;
+}
+
+section + section {
+	margin-top: 1rem;
+}
+
+h1 {
+    font-family: inherit;
+    font-weight: 500;
+	margin: 0.2em 0;
+	font-size: 1.5em;
+    text-rendering: optimizelegibility;
+    flex-grow: 1;
+}
+
+a {
+	color: #fce94f;
+	text-decoration: none;
+}
+
+footer a {
+	color: #BEE6F0;
+	text-decoration: none;
+}
+
+dialog {
+	background-color: rgba(34,175,176,1.0) !important;
+	background: -webkit-linear-gradient(top, rgba(104,144,173,1) 0%,rgba(102,126,153,1) 100%) no-repeat center center fixed !important;
+	background: -moz-linear-gradient(top, rgba(104,144,173,1) 0%,rgba(102,126,153,1) 100%) no-repeat center center fixed !important;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	border: 1px solid #1587d4 !important;
+	color: white !important;
+}
+
+dialog > form {
+	max-width: 480px;
+}
+
+dialog > form > p {
+    color: white;
+    font-family: inherit;
+    font-weight: 500;
+	margin: 0 0 1em 0;
+}
+
+.hboxrow {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+.hboxrow > div + div {
+	margin-left: 10px;
+}
+
+dialog .hboxrow > input {
+	flex-grow: 1;
+}
+
+dialog::backdrop { /* native */
+  background-color: rgba(0,0,0,0.6) !important;
+}
+dialog + .backdrop { /* polyfill */
+  background-color: rgba(0,0,0,0.6) !important;
+}
+
+textarea {
+	font-size: 0.9rem;
+	background: none;
+	border: 1px solid #666;
+	padding: 2px 4px;
+}
+
+textarea:focus {
+	border: 2px solid #fce94f;
+	padding: 1px 3px;
+}
+
+input[type=text],
+input[type=password],
+input[type=date] {
+	border: none;
+	border-bottom: 2px solid #666;
+	background: none;
+	padding-bottom: 2px;
+	min-height: 32px;
+	font-size: 0.9rem;
+	color: #fce94f;
+	width: 10em;
+}
+
+input:focus {
+	border-bottom: 4px solid #fce94f;
+	padding-bottom: 0px;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=date]:focus,
+textarea:focus {
+	outline: none;
+}
+
+input + input,
+input + button,
+button + button {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#criteria-form button,
+dialog button {
+	background-color: #fce94f;
+	border: none;
+	min-width: 4em;
+	min-height: 40px;
+}
+
+button:disabled {
+	background-color: #666;
+	opacity: 0.5;
+}
+
+button.destructive {
+	background-color: #c00;
+	color: #fff;
+}
+
+button.secondary {
+	background-color: #fbfce4;
+	color: #333;
+}
+
+.status {
+	color: #fce94f;
+}
+
+.caption {
+	font-size: 0.8em;
+	color: #ccc;
+}
+
+form > .hboxrow > label {
+	align-self: start;
+	font-weight: bold;
+	font-size: 0.8rem;
+	flex: 0 0 120px;
+	margin-top: 0.8rem;
+}
+
+form > .hboxrow + .hboxrow {
+	margin-top: 1rem;
+}
+
+#criteria-form .hboxrow > :nth-child(2) {
+	flex: 1 0 200px;
+}
+
+#criteria-form .hboxrow > :nth-child(3) {
+	flex: 0 0 100px;
+}
+
+#criteria-form button {
+	min-width: 100px;
+}
+
+#criteria-form input[type=text] {
+	width: 90%;
+	margin-top: 0;
+}
+
+#criteria-form select {
+	min-height: 32px;
+	margin-top: 0.4rem;
+}
+
+#criteria-form textarea {
+	width: 90%;
+	height: 5rem;
+}
+
+#data-table table {
+	border-collapse: collapse;
+}
+
+#data-table th {
+	text-align: left;
+	border-bottom: 1px solid white;
+}
+
+#data-table td {
+	font-size: 0.8em;
+}
+
+#data-table td + td,
+#data-table th + th {
+	padding-left: 1rem;
+}
+
+#data-table tr + tr td {
+	padding-top: 4px;
+	padding-bottom: 4px;
+	border-top: 1px dashed #184156;
+}
