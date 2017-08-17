@@ -4,6 +4,11 @@ This project contains a webapp that uses the [Datum Loader][sn-datum-loader]
 package to query for datum. See the [API Developer Guide][solarnet-api] for more
 information, especially the [SolarQuery guide][solarquery-api].
 
+![demo](docs/datum-loader-demo.gif)
+
+This video is also available at [full size](https://youtu.be/otQJynw4bMI).
+
+
 ## Building
 
 Development server can be run via
