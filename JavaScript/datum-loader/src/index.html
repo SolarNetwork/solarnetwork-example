@@ -10,8 +10,9 @@
 	<link type="text/css" rel="stylesheet" href="css/datum-loader.css">
 </head>
 <body>
-	<header class="hboxrow">
+	<header>
 		<h1>SolarNode Datum Loader</h1>
+		<p>A demonstration of the <a href="https://github.com/SolarNetwork/sn-datum-loader-js">Datum Loader</a> SolarNetwork SDK package.</p>
 	</header>
 	<section>
 		<form id="criteria-form">
@@ -35,8 +36,9 @@
 				<div>
 					<textarea name="sourceIds" placeholder="Comma-delimited list of source IDs." disabled></textarea>
 					<p class="caption">
-						Use the <b>Find Sources</b> button to find all available sources, or enter a source ID wildcard pattern 
-						here first to find sources that match that pattern.
+						Use the <b>Find Sources</b> button to find all available sources, or enter a source ID 
+						<a href="https://github.com/SolarNetwork/solarnetwork/wiki/SolarNet-API-global-objects#wildcard-patterns">wildcard
+						pattern</a> here first to find sources that match that pattern.
 					</p>
 				</div>
 				<div>
@@ -64,14 +66,17 @@
 		<p>There are several helpers demonstrated on this page:</p>
 		<ul>
 			<li>The <a 
-			href="https://solarnetwork.github.io/docs/api/js/solarnetwork-datum-loader/0.6.2/DatumRangeFinder.html"><code>DatumRangeFinder</code></a>
-			class is used via the <b>Find Range</b> button to query for the available data range.</li>
+				href="https://solarnetwork.github.io/docs/api/js/solarnetwork-datum-loader/0.6.2/DatumRangeFinder.html"><code>DatumRangeFinder</code></a>
+				class is used via the <b>Find Range</b> button to <a href="https://github.com/SolarNetwork/solarnetwork-example/blob/e219d448c470059bf39110559969a72ceee5c1aa/JavaScript/datum-loader/src/datum-loader.js#L166-L167">fetch
+				the available date range</a>.</li>
 			<li>The <a 
 				href="https://solarnetwork.github.io/docs/api/js/solarnetwork-datum-loader/0.6.2/DatumSourceFinder.html"><code>DatumSourceFinder</code></a>
-				class is used via the <b>Find Sources</b> button to query for the available sources.</li>
+				class is used via the <b>Find Sources</b> button to <a href="https://github.com/SolarNetwork/solarnetwork-example/blob/e219d448c470059bf39110559969a72ceee5c1aa/JavaScript/datum-loader/src/datum-loader.js#L154">fetch
+				the available sources</a>.</li>
 			<li>The <a 
 				href="https://solarnetwork.github.io/docs/api/js/solarnetwork-datum-loader/0.6.2/DatumLoader.html"><code>DatumLoader</code></a>
-				class is used via the <b>Load Datum</b> button to query for the actual data.</li>
+				class is used via the <b>Load Datum</b> button to <a href="https://github.com/SolarNetwork/solarnetwork-example/blob/e219d448c470059bf39110559969a72ceee5c1aa/JavaScript/datum-loader/src/datum-loader.js#L196">fetch
+				the actual data</a>.</li>
 			</li>
 		</ul>
 	</section>

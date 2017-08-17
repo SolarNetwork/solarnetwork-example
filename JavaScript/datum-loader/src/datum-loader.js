@@ -313,7 +313,8 @@ function setupUI(config, app) {
 	// populate the avaialble aggregation levels from the Aggregation enum (plus None)
 	const aggregationSelect = select('select[name=aggregation]');
 	aggregationSelect.selectAll('option')
-		.data([{name:'None'}].concat(Aggregation.enumValues()), d => d.name)
+		.data([{name:'None'}].concat(Aggregation.enumValues().filter(
+			e => !/(Of|Total|Minute|Week)/.test(e.name))), d => d.name)
 		.enter().append('option')
 			.attr('value', d => d.name === 'None' ? '' : d.name)
 			.text(d => d.name);

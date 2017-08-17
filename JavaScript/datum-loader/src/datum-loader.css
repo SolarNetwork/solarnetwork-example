@@ -20,13 +20,14 @@ header {
 
 footer {
 	clear: both;
-	color: white;
 	font-size: 10px;
 	text-align: right;
 	margin: 10px 20px;
 }
 
-section {
+header,
+section,
+footer {
 	color: white;
 }
 
@@ -35,7 +36,6 @@ section + section {
 }
 
 h1 {
-    color: white;
     font-family: inherit;
     font-weight: 500;
 	margin: 0.2em 0;
@@ -45,6 +45,11 @@ h1 {
 }
 
 a {
+	color: #fce94f;
+	text-decoration: none;
+}
+
+footer a {
 	color: #BEE6F0;
 	text-decoration: none;
 }
