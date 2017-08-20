@@ -24,8 +24,7 @@
     "d3-selection": "^1.1.0",
     "dialog-polyfill": "^0.4.8",
     "solarnetwork-api-core": "0.6",
-    "solarnetwork-control-toggler": "0.1.1",
-    "webpack-merge": "^4.1.0"
+    "solarnetwork-control-toggler": "0.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -39,6 +38,7 @@
     "uglify-es": "^3.0.25",
     "uglifyjs-webpack-plugin": "v1.0.0-beta.1",
     "webpack": "^3.1.0",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.7.1",
+    "webpack-merge": "^4.1.0"
   }
 }
