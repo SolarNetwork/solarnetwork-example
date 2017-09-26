@@ -20,6 +20,12 @@
 		<property name="serviceClassName" value="net.solarnetwork.node.dao.DatumDao"/>
 		<property name="serviceFilter" value="(datumClassName=net.solarnetwork.node.domain.GeneralNodeDatum)"/>
 	</bean>
+	
+	<!-- provides access to the OSGi event bus -->
+	<bean id="eventAdmin" class="net.solarnetwork.util.DynamicServiceTracker">
+		<property name="bundleContext" ref="bundleContext"/>
+		<property name="serviceClassName" value="org.osgi.service.event.EventAdmin"/>
+	</bean>
 
 	<!-- support localized strings for the settings in the GUI -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -101,6 +107,7 @@
 							<entry key="datumDataSource">
 								<bean class="net.solarnetwork.node.example.datum_capture.FoobarDatumDataSource">
 									<property name="messageSource" ref="jobMessageSource"/>
+									<property name="eventAdmin" ref="eventAdmin"/>
 								</bean>
 							</entry>
 						</map>
