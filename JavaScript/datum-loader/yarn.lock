@@ -3248,21 +3248,21 @@ sockjs@0.3.18:
     faye-websocket "^0.10.0"
     uuid "^2.0.2"
 
-solarnetwork-api-core@0.7:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/solarnetwork-api-core/-/solarnetwork-api-core-0.7.0.tgz#3d7eb41ee264e7253f1cf8f6065ef33c8ca112c5"
+solarnetwork-api-core@>=0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/solarnetwork-api-core/-/solarnetwork-api-core-0.9.3.tgz#04626656d8b5e8cf65e24ea2fbd8966169eb72eb"
   dependencies:
     crypto-js "^3.1.9-1"
     d3-time-format "^2.0.5"
     uri-js "^3.0.2"
 
-solarnetwork-datum-loader@0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/solarnetwork-datum-loader/-/solarnetwork-datum-loader-0.6.2.tgz#bfb8733db9344cc377f84201f79f886bf9ba4ad3"
+solarnetwork-datum-loader@>=0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/solarnetwork-datum-loader/-/solarnetwork-datum-loader-0.7.0.tgz#f62087b5d91e3c34f316280b9fe96201297b01f7"
   dependencies:
     d3-queue "^3.0.7"
     d3-request "^1.0.5"
-    solarnetwork-api-core "0.7"
+    solarnetwork-api-core ">=0.9.3"
 
 source-list-map@^2.0.0:
   version "2.0.0"
