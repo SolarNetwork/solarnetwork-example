@@ -26,41 +26,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.context.MessageSource;
 import net.solarnetwork.node.DatumDataSource;
 import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
+import net.solarnetwork.node.domain.PVEnergyDatum;
 import net.solarnetwork.node.settings.SettingSpecifier;
 import net.solarnetwork.node.settings.SettingSpecifierProvider;
 import net.solarnetwork.node.settings.support.BasicTextFieldSettingSpecifier;
+import net.solarnetwork.node.support.DatumDataSourceSupport;
 
 /**
  * Implementation of {@link DatumDataSource} for Foobar inverter power.
  * 
  * @author matt
- * @version 1.0
+ * @version 1.1
  */
-public class FoobarDatumDataSource
-		implements DatumDataSource<GeneralNodePVEnergyDatum>, SettingSpecifierProvider {
+public class FoobarDatumDataSource extends DatumDataSourceSupport
+		implements DatumDataSource<PVEnergyDatum>, SettingSpecifierProvider {
 
 	private final AtomicLong wattHourReading = new AtomicLong(0);
 
 	private String sourceId = "Inverter1";
-	private MessageSource messageSource;
 
 	@Override
-	public String getUID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getGroupUID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Class<? extends GeneralNodePVEnergyDatum> getDatumType() {
+	public Class<? extends PVEnergyDatum> getDatumType() {
 		return GeneralNodePVEnergyDatum.class;
 	}
 
@@ -78,6 +66,9 @@ public class FoobarDatumDataSource
 		datum.setWatts(watts);
 		datum.setWattHourReading(wattHours);
 		datum.setSourceId(sourceId);
+
+		postDatumCapturedEvent(datum);
+
 		return datum;
 	}
 
@@ -92,11 +83,6 @@ public class FoobarDatumDataSource
 	}
 
 	@Override
-	public MessageSource getMessageSource() {
-		return messageSource;
-	}
-
-	@Override
 	public List<SettingSpecifier> getSettingSpecifiers() {
 		FoobarDatumDataSource defaults = new FoobarDatumDataSource();
 		List<SettingSpecifier> results = new ArrayList<SettingSpecifier>(1);
@@ -106,10 +92,6 @@ public class FoobarDatumDataSource
 
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
-	}
-
-	public void setMessageSource(MessageSource messageSource) {
-		this.messageSource = messageSource;
 	}
 
 }
