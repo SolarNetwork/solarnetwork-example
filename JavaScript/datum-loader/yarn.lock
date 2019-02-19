@@ -1099,9 +1099,19 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
+d3-array@^1.2.1:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-1.2.4.tgz#635ce4d5eea759f6f605863dbcfc30edc737f71f"
+  integrity sha512-KHW6M86R+FUPYGb3R5XiYjXPq7VzwxZ22buHhAEVG5ztoEcZZMLov530mmccaqA1GghZArjQV46fuc8kUqhhHw==
+
 d3-collection@1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/d3-collection/-/d3-collection-1.0.4.tgz#342dfd12837c90974f33f1cc0a785aea570dcdc2"
+
+d3-collection@^1.0.4:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/d3-collection/-/d3-collection-1.0.7.tgz#349bd2aa9977db071091c13144d5e4f16b5b310e"
+  integrity sha512-ii0/r5f4sjKNTfh84Di+DpztYwqKhEyUlKoPrzUFfeSkWxjW49xU2QzO9qrPrNkpdI0XJkfzvmTu8V2Zylln6A==
 
 d3-dispatch@1:
   version "1.0.3"
@@ -3248,21 +3258,25 @@ sockjs@0.3.18:
     faye-websocket "^0.10.0"
     uuid "^2.0.2"
 
-solarnetwork-api-core@>=0.9.3:
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/solarnetwork-api-core/-/solarnetwork-api-core-0.9.3.tgz#04626656d8b5e8cf65e24ea2fbd8966169eb72eb"
+solarnetwork-api-core@>=0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/solarnetwork-api-core/-/solarnetwork-api-core-0.17.0.tgz#2d6ecf21060250c237197cd2b12aa636b69b6e1e"
+  integrity sha512-QwDDAnJ09ACYAZMrMwIQZAHmrYh+gHraogrqwyCAYDQUfokfZXuQEzOw1BKw/oWKvK80b1QLbwsp917iSqdXew==
   dependencies:
     crypto-js "^3.1.9-1"
+    d3-array "^1.2.1"
+    d3-collection "^1.0.4"
     d3-time-format "^2.0.5"
     uri-js "^3.0.2"
 
-solarnetwork-datum-loader@>=0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/solarnetwork-datum-loader/-/solarnetwork-datum-loader-0.7.0.tgz#f62087b5d91e3c34f316280b9fe96201297b01f7"
+solarnetwork-datum-loader@>=0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/solarnetwork-datum-loader/-/solarnetwork-datum-loader-0.9.0.tgz#b8a88126fd73406ca6def05eb52c6f5aad136438"
+  integrity sha512-d5Wc6VTRztFh/8IgtCga2JCBH+m5vjY+pNcq6/gwtTkt42vIfeB0+DOdXpLJPasa3Sgz5eSCfvi2FN4fHSN92Q==
   dependencies:
     d3-queue "^3.0.7"
     d3-request "^1.0.5"
-    solarnetwork-api-core ">=0.9.3"
+    solarnetwork-api-core ">=0.17.0"
 
 source-list-map@^2.0.0:
   version "2.0.0"
