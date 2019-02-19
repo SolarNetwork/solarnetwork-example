@@ -10,7 +10,6 @@ import {
 	DatumLoader,
 	DatumRangeFinder,
 	DatumSourceFinder,
-	MultiLoader,
 	} from 'solarnetwork-datum-loader';
 import { event as d3event, select, selectAll } from 'd3-selection';
 import dialogPolyfill from 'dialog-polyfill';
@@ -39,6 +38,7 @@ const datumLoaderApp = function(options) {
 	const tableGenerator = dataTableHtml().headerRow0(true);
 
 	var dialogCancelled = false;
+	var readingMode = false;
 
 	/**
 	 * Get/set the credentials HTML <dialog> element to use.
@@ -62,6 +62,12 @@ const datumLoaderApp = function(options) {
 	function initialInput(value) {
 		if ( !arguments.length ) return initialInputElement;
 		initialInputElement = value;
+		return self;
+	}
+
+	function readings(value) {
+		if ( !arguments.length ) return readingMode;
+		readingMode = !!value;
 		return self;
 	}
 
@@ -193,7 +199,7 @@ const datumLoaderApp = function(options) {
 
 	async function loadDataTable(container) {
 		try {
-			const results = await new DatumLoader(urlHelper, filter, auth).fetch();
+			const results = await new DatumLoader(urlHelper, filter, auth).readings(readingMode).fetch();
 
 			// convert results to array form; preserving column order and generating a header row
 			const ordering = new Map([
@@ -233,6 +239,7 @@ const datumLoaderApp = function(options) {
 			credentialsDialog: { value: credentialsDialog },
 			endDate: { value : endDate },
 			initialInput : { value : initialInput },
+			readings : { value : readings },
 			nodeIds: { value : nodeIds },
 			sourceIds: { value : sourceIds },
 			startDate: { value : startDate },
@@ -323,6 +330,13 @@ function setupUI(config, app) {
 		app.aggregation(selVal ? Aggregation.valueOf(selVal) : null);
 	});
 	nodeIdInputDeps.push(aggregationSelect);
+
+	const dataModeRadios = selectAll('input[name=dataMode]');
+	dataModeRadios.on('change', function() {
+		const value = this.value;
+		const checked = this.checked;
+		app.readings(value == 'reading' && checked);
+	});
 
 	// form submit button
 	const submitButton = select('#criteria-form button[type="submit"]');
