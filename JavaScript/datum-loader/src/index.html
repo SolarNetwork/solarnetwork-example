@@ -33,7 +33,7 @@
 			</div>
 			<div class="hboxrow">
 				<label for="sourceIds">Source IDs</label>
-				<div>
+				<div class="label-align">
 					<textarea name="sourceIds" placeholder="Comma-delimited list of source IDs." disabled></textarea>
 					<p class="caption">
 						Use the <b>Find Sources</b> button to find all available sources, or enter a source ID 
@@ -53,10 +53,14 @@
 			</div>
 			<div class="hboxrow">
 				<label for="readings">Data</label>
-				<div>
+				<div class="label-align">
 					<input type="radio" name="dataMode" value="list" checked> List
 					<input type="radio" name="dataMode" value="reading"> Reading
 				</div>
+			</div>
+			<div class="hboxrow">
+				<label for="parallelism">Parallelism</label>
+				<div><input type="text" name="parallelism" minimum="0" value="0" placeholder="Integer greater than 2 for number of parallel queries"></div>
 			</div>
 			<div class="hboxrow">
 				<label></label>
