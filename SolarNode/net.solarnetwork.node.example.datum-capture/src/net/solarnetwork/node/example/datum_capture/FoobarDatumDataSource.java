@@ -22,10 +22,13 @@
 
 package net.solarnetwork.node.example.datum_capture;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.concurrent.atomic.AtomicLong;
-import net.solarnetwork.node.DatumDataSource;
-import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
+import net.solarnetwork.domain.datum.DatumSamples;
+import net.solarnetwork.node.domain.datum.AcDcEnergyDatum;
+import net.solarnetwork.node.domain.datum.SimpleAcDcEnergyDatum;
+import net.solarnetwork.node.service.DatumDataSource;
+import net.solarnetwork.node.service.support.DatumDataSourceSupport;
 
 /**
  * Implementation of {@link DatumDataSource} for Foobar inverter power.
@@ -33,31 +36,27 @@ import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
  * @author matt
  * @version 1.0
  */
-public class FoobarDatumDataSource implements DatumDataSource<GeneralNodePVEnergyDatum> {
+public class FoobarDatumDataSource extends DatumDataSourceSupport implements DatumDataSource {
 
 	private final AtomicLong wattHourReading = new AtomicLong(0);
 
 	private String sourceId = "Inverter1";
 
-	@Override
-	public String getUID() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Constructor.
+	 */
+	public FoobarDatumDataSource() {
+		super();
+		setDisplayName("Foobar Datum Source");
 	}
 
 	@Override
-	public String getGroupUID() {
-		// TODO Auto-generated method stub
-		return null;
+	public Class<? extends AcDcEnergyDatum> getDatumType() {
+		return SimpleAcDcEnergyDatum.class;
 	}
 
 	@Override
-	public Class<? extends GeneralNodePVEnergyDatum> getDatumType() {
-		return GeneralNodePVEnergyDatum.class;
-	}
-
-	@Override
-	public GeneralNodePVEnergyDatum readCurrentDatum() {
+	public AcDcEnergyDatum readCurrentDatum() {
 		// our inverter is a 1kW system, let's produce a random value between 0-1000
 		int watts = (int) Math.round(Math.random() * 1000.0);
 
@@ -65,14 +64,28 @@ public class FoobarDatumDataSource implements DatumDataSource<GeneralNodePVEnerg
 		// the assumption we will read samples once per minute
 		long wattHours = wattHourReading.addAndGet(Math.round(Math.random() * 15.0));
 
-		GeneralNodePVEnergyDatum datum = new GeneralNodePVEnergyDatum();
-		datum.setCreated(new Date());
+		SimpleAcDcEnergyDatum datum = new SimpleAcDcEnergyDatum(sourceId, Instant.now(),
+				new DatumSamples());
 		datum.setWatts(watts);
 		datum.setWattHourReading(wattHours);
-		datum.setSourceId(sourceId);
 		return datum;
 	}
 
+	/**
+	 * Get the source ID.
+	 * 
+	 * @return the configured source ID
+	 */
+	public String getSourceId() {
+		return sourceId;
+	}
+
+	/**
+	 * Set the source ID to use.
+	 * 
+	 * @param sourceId
+	 *        the source ID
+	 */
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
 	}
