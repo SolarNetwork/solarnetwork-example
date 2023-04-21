@@ -38,9 +38,12 @@ import net.solarnetwork.node.service.support.DatumDataSourceSupport;
  */
 public class FoobarDatumDataSource extends DatumDataSourceSupport implements DatumDataSource {
 
+	/** The {@code sourceId} property default value. */
+	public static final String DEFAULT_SOURCE_ID = "Inverter1";
+
 	private final AtomicLong wattHourReading = new AtomicLong(0);
 
-	private String sourceId = "Inverter1";
+	private String sourceId = DEFAULT_SOURCE_ID;
 
 	/**
 	 * Constructor.
@@ -60,7 +63,7 @@ public class FoobarDatumDataSource extends DatumDataSourceSupport implements Dat
 		// our inverter is a 1kW system, let's produce a random value between 0-1000
 		int watts = (int) Math.round(Math.random() * 1000.0);
 
-		// we'll increment our Wh reading by a random amount between 0-15, with
+		// we will increment our Wh reading by a random amount between 0-15, with
 		// the assumption we will read samples once per minute
 		long wattHours = wattHourReading.addAndGet(Math.round(Math.random() * 15.0));
 
