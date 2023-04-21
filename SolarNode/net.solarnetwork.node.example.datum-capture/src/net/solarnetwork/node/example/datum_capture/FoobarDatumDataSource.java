@@ -22,6 +22,7 @@
 
 package net.solarnetwork.node.example.datum_capture;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,15 @@ import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
 import net.solarnetwork.node.settings.SettingSpecifier;
 import net.solarnetwork.node.settings.SettingSpecifierProvider;
 import net.solarnetwork.node.settings.support.BasicTextFieldSettingSpecifier;
+=======
+import java.time.Instant;
+import java.util.concurrent.atomic.AtomicLong;
+import net.solarnetwork.domain.datum.DatumSamples;
+import net.solarnetwork.node.domain.datum.AcDcEnergyDatum;
+import net.solarnetwork.node.domain.datum.SimpleAcDcEnergyDatum;
+import net.solarnetwork.node.service.DatumDataSource;
+import net.solarnetwork.node.service.support.DatumDataSourceSupport;
+>>>>>>> datum-capture-part-1
 
 /**
  * Implementation of {@link DatumDataSource} for Foobar inverter power.
@@ -39,6 +49,7 @@ import net.solarnetwork.node.settings.support.BasicTextFieldSettingSpecifier;
  * @author matt
  * @version 1.0
  */
+<<<<<<< HEAD
 public class FoobarDatumDataSource
 		implements DatumDataSource<GeneralNodePVEnergyDatum>, SettingSpecifierProvider {
 
@@ -46,41 +57,47 @@ public class FoobarDatumDataSource
 
 	private String sourceId = "Inverter1";
 	private MessageSource messageSource;
+=======
+public class FoobarDatumDataSource extends DatumDataSourceSupport implements DatumDataSource {
 
-	@Override
-	public String getUID() {
-		// TODO Auto-generated method stub
-		return null;
+	/** The {@code sourceId} property default value. */
+	public static final String DEFAULT_SOURCE_ID = "Inverter1";
+
+	private final AtomicLong wattHourReading = new AtomicLong(0);
+
+	private String sourceId = DEFAULT_SOURCE_ID;
+>>>>>>> datum-capture-part-1
+
+	/**
+	 * Constructor.
+	 */
+	public FoobarDatumDataSource() {
+		super();
+		setDisplayName("Foobar Datum Source");
 	}
 
 	@Override
-	public String getGroupUID() {
-		// TODO Auto-generated method stub
-		return null;
+	public Class<? extends AcDcEnergyDatum> getDatumType() {
+		return SimpleAcDcEnergyDatum.class;
 	}
 
 	@Override
-	public Class<? extends GeneralNodePVEnergyDatum> getDatumType() {
-		return GeneralNodePVEnergyDatum.class;
-	}
-
-	@Override
-	public GeneralNodePVEnergyDatum readCurrentDatum() {
+	public AcDcEnergyDatum readCurrentDatum() {
 		// our inverter is a 1kW system, let's produce a random value between 0-1000
 		int watts = (int) Math.round(Math.random() * 1000.0);
 
-		// we'll increment our Wh reading by a random amount between 0-15, with
+		// we will increment our Wh reading by a random amount between 0-15, with
 		// the assumption we will read samples once per minute
 		long wattHours = wattHourReading.addAndGet(Math.round(Math.random() * 15.0));
 
-		GeneralNodePVEnergyDatum datum = new GeneralNodePVEnergyDatum();
-		datum.setCreated(new Date());
+		SimpleAcDcEnergyDatum datum = new SimpleAcDcEnergyDatum(sourceId, Instant.now(),
+				new DatumSamples());
 		datum.setWatts(watts);
 		datum.setWattHourReading(wattHours);
-		datum.setSourceId(sourceId);
 		return datum;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public String getSettingUID() {
 		return "net.solarnetwork.node.example.datum_capture.foobar";
@@ -104,6 +121,23 @@ public class FoobarDatumDataSource
 		return results;
 	}
 
+=======
+	/**
+	 * Get the source ID.
+	 * 
+	 * @return the configured source ID
+	 */
+	public String getSourceId() {
+		return sourceId;
+	}
+
+	/**
+	 * Set the source ID to use.
+	 * 
+	 * @param sourceId
+	 *        the source ID
+	 */
+>>>>>>> datum-capture-part-1
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
 	}
