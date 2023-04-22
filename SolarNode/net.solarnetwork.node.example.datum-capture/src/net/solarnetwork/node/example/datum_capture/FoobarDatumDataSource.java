@@ -22,26 +22,17 @@
 
 package net.solarnetwork.node.example.datum_capture;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.context.MessageSource;
-import net.solarnetwork.node.DatumDataSource;
-import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
-import net.solarnetwork.node.settings.SettingSpecifier;
-import net.solarnetwork.node.settings.SettingSpecifierProvider;
-import net.solarnetwork.node.settings.support.BasicTextFieldSettingSpecifier;
-=======
 import java.time.Instant;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import net.solarnetwork.domain.datum.DatumSamples;
 import net.solarnetwork.node.domain.datum.AcDcEnergyDatum;
 import net.solarnetwork.node.domain.datum.SimpleAcDcEnergyDatum;
 import net.solarnetwork.node.service.DatumDataSource;
 import net.solarnetwork.node.service.support.DatumDataSourceSupport;
->>>>>>> datum-capture-part-1
+import net.solarnetwork.settings.SettingSpecifier;
+import net.solarnetwork.settings.SettingSpecifierProvider;
+import net.solarnetwork.settings.support.BasicTextFieldSettingSpecifier;
 
 /**
  * Implementation of {@link DatumDataSource} for Foobar inverter power.
@@ -49,16 +40,8 @@ import net.solarnetwork.node.service.support.DatumDataSourceSupport;
  * @author matt
  * @version 1.0
  */
-<<<<<<< HEAD
-public class FoobarDatumDataSource
-		implements DatumDataSource<GeneralNodePVEnergyDatum>, SettingSpecifierProvider {
-
-	private final AtomicLong wattHourReading = new AtomicLong(0);
-
-	private String sourceId = "Inverter1";
-	private MessageSource messageSource;
-=======
-public class FoobarDatumDataSource extends DatumDataSourceSupport implements DatumDataSource {
+public class FoobarDatumDataSource extends DatumDataSourceSupport
+		implements DatumDataSource, SettingSpecifierProvider {
 
 	/** The {@code sourceId} property default value. */
 	public static final String DEFAULT_SOURCE_ID = "Inverter1";
@@ -66,7 +49,6 @@ public class FoobarDatumDataSource extends DatumDataSourceSupport implements Dat
 	private final AtomicLong wattHourReading = new AtomicLong(0);
 
 	private String sourceId = DEFAULT_SOURCE_ID;
->>>>>>> datum-capture-part-1
 
 	/**
 	 * Constructor.
@@ -97,31 +79,21 @@ public class FoobarDatumDataSource extends DatumDataSourceSupport implements Dat
 		return datum;
 	}
 
-<<<<<<< HEAD
 	@Override
-	public String getSettingUID() {
+	public String getSettingUid() {
 		return "net.solarnetwork.node.example.datum_capture.foobar";
 	}
 
 	@Override
-	public String getDisplayName() {
-		return "Foobar Power";
-	}
-
-	@Override
-	public MessageSource getMessageSource() {
-		return messageSource;
-	}
-
-	@Override
 	public List<SettingSpecifier> getSettingSpecifiers() {
-		FoobarDatumDataSource defaults = new FoobarDatumDataSource();
-		List<SettingSpecifier> results = new ArrayList<SettingSpecifier>(1);
-		results.add(new BasicTextFieldSettingSpecifier("sourceId", defaults.sourceId));
+		// start with settings for the uid and groupUid properties of our parent class
+		List<SettingSpecifier> results = getIdentifiableSettingSpecifiers();
+
+		// add a setting for the sourceId property
+		results.add(new BasicTextFieldSettingSpecifier("sourceId", DEFAULT_SOURCE_ID));
 		return results;
 	}
 
-=======
 	/**
 	 * Get the source ID.
 	 * 
@@ -137,13 +109,8 @@ public class FoobarDatumDataSource extends DatumDataSourceSupport implements Dat
 	 * @param sourceId
 	 *        the source ID
 	 */
->>>>>>> datum-capture-part-1
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
-	}
-
-	public void setMessageSource(MessageSource messageSource) {
-		this.messageSource = messageSource;
 	}
 
 }
