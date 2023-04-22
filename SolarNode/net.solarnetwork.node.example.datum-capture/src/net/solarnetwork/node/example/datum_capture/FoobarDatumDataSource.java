@@ -22,16 +22,17 @@
 
 package net.solarnetwork.node.example.datum_capture;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.context.MessageSource;
-import net.solarnetwork.node.DatumDataSource;
-import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
-import net.solarnetwork.node.settings.SettingSpecifier;
-import net.solarnetwork.node.settings.SettingSpecifierProvider;
-import net.solarnetwork.node.settings.support.BasicTextFieldSettingSpecifier;
+import net.solarnetwork.domain.datum.DatumSamples;
+import net.solarnetwork.node.domain.datum.AcDcEnergyDatum;
+import net.solarnetwork.node.domain.datum.SimpleAcDcEnergyDatum;
+import net.solarnetwork.node.service.DatumDataSource;
+import net.solarnetwork.node.service.support.DatumDataSourceSupport;
+import net.solarnetwork.settings.SettingSpecifier;
+import net.solarnetwork.settings.SettingSpecifierProvider;
+import net.solarnetwork.settings.support.BasicTextFieldSettingSpecifier;
 
 /**
  * Implementation of {@link DatumDataSource} for Foobar inverter power.
@@ -39,77 +40,77 @@ import net.solarnetwork.node.settings.support.BasicTextFieldSettingSpecifier;
  * @author matt
  * @version 1.0
  */
-public class FoobarDatumDataSource
-		implements DatumDataSource<GeneralNodePVEnergyDatum>, SettingSpecifierProvider {
+public class FoobarDatumDataSource extends DatumDataSourceSupport
+		implements DatumDataSource, SettingSpecifierProvider {
+
+	/** The {@code sourceId} property default value. */
+	public static final String DEFAULT_SOURCE_ID = "Inverter1";
 
 	private final AtomicLong wattHourReading = new AtomicLong(0);
 
-	private String sourceId = "Inverter1";
-	private MessageSource messageSource;
+	private String sourceId = DEFAULT_SOURCE_ID;
 
-	@Override
-	public String getUID() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Constructor.
+	 */
+	public FoobarDatumDataSource() {
+		super();
+		setDisplayName("Foobar Datum Source");
 	}
 
 	@Override
-	public String getGroupUID() {
-		// TODO Auto-generated method stub
-		return null;
+	public Class<? extends AcDcEnergyDatum> getDatumType() {
+		return SimpleAcDcEnergyDatum.class;
 	}
 
 	@Override
-	public Class<? extends GeneralNodePVEnergyDatum> getDatumType() {
-		return GeneralNodePVEnergyDatum.class;
-	}
-
-	@Override
-	public GeneralNodePVEnergyDatum readCurrentDatum() {
+	public AcDcEnergyDatum readCurrentDatum() {
 		// our inverter is a 1kW system, let's produce a random value between 0-1000
 		int watts = (int) Math.round(Math.random() * 1000.0);
 
-		// we'll increment our Wh reading by a random amount between 0-15, with
+		// we will increment our Wh reading by a random amount between 0-15, with
 		// the assumption we will read samples once per minute
 		long wattHours = wattHourReading.addAndGet(Math.round(Math.random() * 15.0));
 
-		GeneralNodePVEnergyDatum datum = new GeneralNodePVEnergyDatum();
-		datum.setCreated(new Date());
+		SimpleAcDcEnergyDatum datum = new SimpleAcDcEnergyDatum(sourceId, Instant.now(),
+				new DatumSamples());
 		datum.setWatts(watts);
 		datum.setWattHourReading(wattHours);
-		datum.setSourceId(sourceId);
 		return datum;
 	}
 
 	@Override
-	public String getSettingUID() {
+	public String getSettingUid() {
 		return "net.solarnetwork.node.example.datum_capture.foobar";
 	}
 
 	@Override
-	public String getDisplayName() {
-		return "Foobar Power";
-	}
-
-	@Override
-	public MessageSource getMessageSource() {
-		return messageSource;
-	}
-
-	@Override
 	public List<SettingSpecifier> getSettingSpecifiers() {
-		FoobarDatumDataSource defaults = new FoobarDatumDataSource();
-		List<SettingSpecifier> results = new ArrayList<SettingSpecifier>(1);
-		results.add(new BasicTextFieldSettingSpecifier("sourceId", defaults.sourceId));
+		// start with settings for the uid and groupUid properties of our parent class
+		List<SettingSpecifier> results = getIdentifiableSettingSpecifiers();
+
+		// add a setting for the sourceId property
+		results.add(new BasicTextFieldSettingSpecifier("sourceId", DEFAULT_SOURCE_ID));
 		return results;
 	}
 
-	public void setSourceId(String sourceId) {
-		this.sourceId = sourceId;
+	/**
+	 * Get the source ID.
+	 * 
+	 * @return the configured source ID
+	 */
+	public String getSourceId() {
+		return sourceId;
 	}
 
-	public void setMessageSource(MessageSource messageSource) {
-		this.messageSource = messageSource;
+	/**
+	 * Set the source ID to use.
+	 * 
+	 * @param sourceId
+	 *        the source ID
+	 */
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
 	}
 
 }
