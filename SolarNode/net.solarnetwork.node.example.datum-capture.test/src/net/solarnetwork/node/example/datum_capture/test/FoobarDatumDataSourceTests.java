@@ -27,7 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.solarnetwork.node.domain.GeneralNodePVEnergyDatum;
+import net.solarnetwork.node.domain.datum.AcDcEnergyDatum;
 import net.solarnetwork.node.example.datum_capture.FoobarDatumDataSource;
 
 /**
@@ -52,7 +52,7 @@ public class FoobarDatumDataSourceTests {
 
 	@Test
 	public void readOneDatum() {
-		GeneralNodePVEnergyDatum d = service.readCurrentDatum();
+		AcDcEnergyDatum d = service.readCurrentDatum();
 		log.trace("Got datum: {}", d);
 
 		// datum should not be null
@@ -74,7 +74,7 @@ public class FoobarDatumDataSourceTests {
 	public void readSeveralDatum() {
 		long lastWattHourReading = 0;
 		for ( int i = 0; i < 10; i++ ) {
-			GeneralNodePVEnergyDatum d = service.readCurrentDatum();
+			AcDcEnergyDatum d = service.readCurrentDatum();
 			log.trace("Got datum: {}", d);
 
 			Assert.assertNotNull("Current datum", d);
