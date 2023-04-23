@@ -23,12 +23,16 @@
 package net.solarnetwork.node.example.datum_capture;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import net.solarnetwork.domain.datum.DatumSamples;
 import net.solarnetwork.node.domain.datum.AcDcEnergyDatum;
 import net.solarnetwork.node.domain.datum.SimpleAcDcEnergyDatum;
 import net.solarnetwork.node.service.DatumDataSource;
 import net.solarnetwork.node.service.support.DatumDataSourceSupport;
+import net.solarnetwork.settings.SettingSpecifier;
+import net.solarnetwork.settings.SettingSpecifierProvider;
+import net.solarnetwork.settings.support.BasicTextFieldSettingSpecifier;
 
 /**
  * Implementation of {@link DatumDataSource} for Foobar inverter power.
@@ -36,7 +40,8 @@ import net.solarnetwork.node.service.support.DatumDataSourceSupport;
  * @author matt
  * @version 1.0
  */
-public class FoobarDatumDataSource extends DatumDataSourceSupport implements DatumDataSource {
+public class FoobarDatumDataSource extends DatumDataSourceSupport
+		implements DatumDataSource, SettingSpecifierProvider {
 
 	/** The {@code sourceId} property default value. */
 	public static final String DEFAULT_SOURCE_ID = "Inverter1";
@@ -72,6 +77,21 @@ public class FoobarDatumDataSource extends DatumDataSourceSupport implements Dat
 		datum.setWatts(watts);
 		datum.setWattHourReading(wattHours);
 		return datum;
+	}
+
+	@Override
+	public String getSettingUid() {
+		return "net.solarnetwork.node.example.datum_capture.foobar";
+	}
+
+	@Override
+	public List<SettingSpecifier> getSettingSpecifiers() {
+		// start with settings for the uid and groupUid properties of our parent class
+		List<SettingSpecifier> results = getIdentifiableSettingSpecifiers();
+
+		// add a setting for the sourceId property
+		results.add(new BasicTextFieldSettingSpecifier("sourceId", DEFAULT_SOURCE_ID));
+		return results;
 	}
 
 	/**
