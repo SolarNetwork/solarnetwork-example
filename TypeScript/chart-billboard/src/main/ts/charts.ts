@@ -54,7 +54,7 @@ function generateChart(config?: SeriesConfig) {
 				},
 			},
 			y: {
-				label: c.displayName,
+				label: c.propName,
 				tick: {
 					format: function (v: number) {
 						return v / c.scale;
