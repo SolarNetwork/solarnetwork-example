@@ -1,7 +1,7 @@
 {
   "name": "solarnetwork-example-typescript-chart-billboard",
   "private": true,
-  "version": "0.1.0-dev.0",
+  "version": "1.0.0",
   "author": {
     "name": "Matt Magoffin",
     "email": "matt@solarnetwork.net"
@@ -11,8 +11,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "release": "generate-release --current-version \"$(bin/remove-preid.cjs)\""
+    "preview": "vite preview"
   },
   "ava": {
     "files": [
@@ -35,19 +34,6 @@
       "html"
     ]
   },
-  "config": {
-    "generateRelease": {
-      "no_confirm": false,
-      "remote": "origin",
-      "pre_commit_commands": [
-        "npm run build"
-      ],
-      "post_complete_commands": [
-        "npmversion --increment prepatch --preid dev --nogit-tag"
-      ],
-      "files_to_commit": []
-    }
-  },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "billboard.js": "^3.9.4",
@@ -68,7 +54,6 @@
     "ava": "^5.3.1",
     "c8": "^8.0.1",
     "eslint": "^8.49.0",
-    "generate-release": "^1.1.1",
     "npmversion": "^1.7.0",
     "sass": "^1.67.0",
     "typedoc": "^0.25.1",
