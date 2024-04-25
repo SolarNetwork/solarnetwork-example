@@ -2,6 +2,7 @@
   "name": "solarnetwork-example-typescript-chart-billboard",
   "private": true,
   "version": "1.0.0",
+  "homepage": "https://go.solarnetwork.net/dev/example/typescript-chart-billboard/",
   "author": {
     "name": "Matt Magoffin",
     "email": "matt@solarnetwork.net"
