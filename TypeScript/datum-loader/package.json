@@ -40,7 +40,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "d3-selection": "^3.0.0",
-    "solarnetwork-datum-loader": "SolarNetwork/sn-datum-loader-js#feature/2x"
+    "solarnetwork-datum-loader": "^2.0.0"
   },
   "devDependencies": {
     "@ava/typescript": "^5.0.0",
