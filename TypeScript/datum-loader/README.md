@@ -7,7 +7,7 @@ You can see the example in action here:
 
 <https://go.solarnetwork.net/dev/example/typescript-datum-loader/>
 
-<img alt="Screenshot of the TypeScript Datum Loader app" src="docs/datum-loader-screenshot@2x.png" width="1155">
+<img alt="Screenshot of the TypeScript Datum Loader app" src="docs/datum-loader-screenshot@2x.png" width="1340">
 
 # Key aspects
 
